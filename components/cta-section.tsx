@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 interface CtaSectionProps {
@@ -18,11 +19,11 @@ export function CtaSection({ title, description, buttonText, buttonHref }: CtaSe
                     {description}
                 </p>
                 <div className="mt-8">
-                    <a href={buttonHref}>
+                    <Link href={buttonHref}>
                         <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
                             {buttonText}
                         </Button>
-                    </a>
+                    </Link>
                 </div>
             </div>
 

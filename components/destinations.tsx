@@ -54,9 +54,10 @@ export function Destinations() {
 
         <div className="grid gap-8 md:grid-cols-3">
           {destinations.map((dest) => (
-            <div
+            <Link
               key={dest.title}
-              className="group relative overflow-hidden rounded-xl border border-border bg-card transition-transform duration-500 hover:scale-[1.03]"
+              href={`/destinations/${destinationSlugs[dest.title]}`}
+              className="group relative overflow-hidden rounded-xl border border-border bg-card transition-transform duration-500 hover:scale-[1.03] block"
             >
               {/* Image */}
               <div className="relative aspect-[3/4] overflow-hidden">
@@ -89,18 +90,13 @@ export function Destinations() {
                     <span className="font-serif text-xl text-primary">
                       {dest.price}
                     </span>
-                    <Link href={`/destinations/${destinationSlugs[dest.title]}`}>
-                      <button
-                        type="button"
-                        className="translate-y-2 rounded-lg bg-primary px-5 py-2 text-sm font-medium text-primary-foreground opacity-0 transition-all duration-300 hover:bg-primary/90 group-hover:translate-y-0 group-hover:opacity-100"
-                      >
-                        Reserver
-                      </button>
-                    </Link>
+                    <span className="translate-y-2 rounded-lg bg-primary px-5 py-2 text-sm font-medium text-primary-foreground opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                      Réserver
+                    </span>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
