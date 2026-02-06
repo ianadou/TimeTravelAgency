@@ -2,6 +2,7 @@ import React from "react"
 import type { Metadata, Viewport } from "next"
 import { Geist } from "next/font/google"
 import { Playfair_Display } from "next/font/google"
+import { ChatButton } from "@/components/chatbot/chat-button"
 
 import "./globals.css"
 
@@ -36,6 +37,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${playfair.variable} font-sans antialiased`}
       >
         {children}
+        <ChatButton />
       </body>
     </html>
   )
