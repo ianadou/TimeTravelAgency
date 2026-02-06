@@ -1,13 +1,17 @@
 export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
-      {/* Background image */}
+      {/* Background video */}
       <div className="absolute inset-0">
-        <img
-          src="/images/hero-bg.jpg"
-          alt=""
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="h-full w-full object-cover"
-        />
+        >
+          <source src="/videos/hero-teaser.mp4" type="video/mp4" />
+        </video>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-background/70" />
         {/* Gradient fade at bottom */}
