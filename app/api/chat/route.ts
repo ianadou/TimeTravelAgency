@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
         // Create chat completion with streaming
         const completion = await groq.chat.completions.create({
-            model: "llama3-8b-8192",
+            model: "llama-3.3-70b-versatile", // Updated: llama3-8b-8192 decommissioned
             messages: [
                 {
                     role: "system",

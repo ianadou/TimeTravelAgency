@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -12,7 +12,7 @@ import { TravelerInfoStep } from "@/components/booking/traveler-info-step"
 import { PaymentStep } from "@/components/booking/payment-step"
 import { TicketStep } from "@/components/booking/ticket-step"
 
-export default function BookPage() {
+function BookingContent() {
     const searchParams = useSearchParams()
     const destinationSlug = searchParams.get("destination")
 
@@ -65,57 +65,63 @@ export default function BookPage() {
 
     if (!bookingData.destination) {
         return (
-            <main>
-                <Navbar />
-                <div className="flex min-h-screen items-center justify-center">
-                    <p className="text-muted-foreground">Chargement...</p>
-                </div>
-                <Footer />
-            </main>
+            <div className="flex min-h-screen items-center justify-center">
+                <p className="text-muted-foreground">Chargement...</p>
+            </div>
         )
     }
 
     return (
-        <main>
-            <Navbar />
+        <div className="min-h-screen bg-secondary/20 py-12 md:py-20">
+            <div className="mx-auto max-w-4xl px-6">
+                <BookingWizard currentStep={currentStep} totalSteps={4} />
 
-            <div className="min-h-screen bg-secondary/20 py-12 md:py-20">
-                <div className="mx-auto max-w-4xl px-6">
-                    <BookingWizard currentStep={currentStep} totalSteps={4} />
+                <div className="mt-12">
+                    {currentStep === 1 && (
+                        <TravelDetailsStep
+                            bookingData={bookingData}
+                            onUpdate={updateBookingData}
+                            onNext={handleNextStep}
+                        />
+                    )}
 
-                    <div className="mt-12">
-                        {currentStep === 1 && (
-                            <TravelDetailsStep
-                                bookingData={bookingData}
-                                onUpdate={updateBookingData}
-                                onNext={handleNextStep}
-                            />
-                        )}
+                    {currentStep === 2 && (
+                        <TravelerInfoStep
+                            bookingData={bookingData}
+                            onUpdate={updateBookingData}
+                            onNext={handleNextStep}
+                            onPrev={handlePrevStep}
+                        />
+                    )}
 
-                        {currentStep === 2 && (
-                            <TravelerInfoStep
-                                bookingData={bookingData}
-                                onUpdate={updateBookingData}
-                                onNext={handleNextStep}
-                                onPrev={handlePrevStep}
-                            />
-                        )}
+                    {currentStep === 3 && (
+                        <PaymentStep
+                            bookingData={bookingData}
+                            onSuccess={handlePaymentSuccess}
+                            onPrev={handlePrevStep}
+                        />
+                    )}
 
-                        {currentStep === 3 && (
-                            <PaymentStep
-                                bookingData={bookingData}
-                                onSuccess={handlePaymentSuccess}
-                                onPrev={handlePrevStep}
-                            />
-                        )}
-
-                        {currentStep === 4 && (
-                            <TicketStep bookingData={bookingData as BookingData} />
-                        )}
-                    </div>
+                    {currentStep === 4 && (
+                        <TicketStep bookingData={bookingData as BookingData} />
+                    )}
                 </div>
             </div>
+        </div>
+    )
+}
 
+export default function BookPage() {
+    return (
+        <main>
+            <Navbar />
+            <Suspense fallback={
+                <div className="flex min-h-screen items-center justify-center">
+                    <p className="text-muted-foreground">Chargement...</p>
+                </div>
+            }>
+                <BookingContent />
+            </Suspense>
             <Footer />
         </main>
     )
