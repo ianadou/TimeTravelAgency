@@ -146,7 +146,7 @@ export default async function DestinationPage({ params }: PageProps) {
                 title={`Réservez ${destination.title} Maintenant`}
                 description={`Vivez l'expérience unique de ${destination.period}. Places limitées disponibles.`}
                 buttonText="Réserver Ce Voyage"
-                buttonHref="/#destinations"
+                buttonHref={`/book?destination=${destination.slug}`}
             />
 
             <Footer />
