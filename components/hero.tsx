@@ -8,9 +8,16 @@ export function Hero() {
           loop
           muted
           playsInline
+          poster="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop"
           className="h-full w-full object-cover"
         >
           <source src="/videos/hero-teaser.mp4" type="video/mp4" />
+          {/* Fallback image si la vidéo ne charge pas */}
+          <img
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop"
+            alt="Journey through time"
+            className="h-full w-full object-cover"
+          />
         </video>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-background/70" />
