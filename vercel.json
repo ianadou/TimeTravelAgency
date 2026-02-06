@@ -1,0 +1,7 @@
+{
+    "name": "time-travel-agency",
+    "version": 2,
+    "env": {
+        "GROQ_API_KEY": "@groq_api_key"
+    }
+}
