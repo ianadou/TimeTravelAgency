@@ -1,6 +1,13 @@
 "use client"
 
+import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
+
+const destinationSlugs: Record<string, string> = {
+  "Paris 1889": "paris-1889",
+  "Cretace Superieur": "cretaceous",
+  "Florence 1504": "florence-1504",
+}
 
 const destinations = [
   {
@@ -82,12 +89,14 @@ export function Destinations() {
                     <span className="font-serif text-xl text-primary">
                       {dest.price}
                     </span>
-                    <button
-                      type="button"
-                      className="translate-y-2 rounded-lg bg-primary px-5 py-2 text-sm font-medium text-primary-foreground opacity-0 transition-all duration-300 hover:bg-primary/90 group-hover:translate-y-0 group-hover:opacity-100"
-                    >
-                      Reserver
-                    </button>
+                    <Link href={`/destinations/${destinationSlugs[dest.title]}`}>
+                      <button
+                        type="button"
+                        className="translate-y-2 rounded-lg bg-primary px-5 py-2 text-sm font-medium text-primary-foreground opacity-0 transition-all duration-300 hover:bg-primary/90 group-hover:translate-y-0 group-hover:opacity-100"
+                      >
+                        Reserver
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
